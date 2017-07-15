@@ -1,6 +1,6 @@
 Django Namedtuples
 - 
-[![Travis CI build](https://travis-ci.org/yavia/django-namedtuples.svg?branch=master)](https://travis-ci.org/yavia/django-namedtuples.svg?branch=master)
+![Travis CI build](https://travis-ci.org/yavia/django-namedtuples.svg?branch=master)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fyavia%2Fdjango-namedtuples.svg?type=shield)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fyavia%2Fdjango-namedtuples?ref=badge_shield)
 
 
