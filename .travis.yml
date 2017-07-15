@@ -1,0 +1,51 @@
+dist: trusty
+
+services:
+  - postgresql
+
+addons:
+  postgresql: '9.6'
+
+language: python
+
+python:
+  - '2.7'
+  - '3.4'
+  - '3.5'
+  - '3.6'
+
+env:
+  global:
+    - DJANGO_SETTINGS_MODULE='django_settings'
+  matrix:
+    - DJANGO_VERSION=1.7.0
+    - DJANGO_VERSION=1.7.11
+    - DJANGO_VERSION=1.8.18
+    - DJANGO_VERSION=1.9.13
+    - DJANGO_VERSION=1.10.7
+    - DJANGO_VERSION=1.11.3
+
+matrix:
+  exclude:
+    # django<1.8 doesn't work on python>3.4
+    - python: '3.5'
+      env: DJANGO_VERSION=1.7.0
+    - python: '3.5'
+      env: DJANGO_VERSION=1.7.11
+    - python: '3.6'
+      env: DJANGO_VERSION=1.7.0
+    - python: '3.6'
+      env: DJANGO_VERSION=1.7.11
+
+before_install:
+  - psql -c 'create database travis_ci_db;' -U postgres
+
+install:
+  - pip install -q psycopg2==2.7.1 pytest-django==3.1.2 Django==$DJANGO_VERSION
+  - python setup.py -q install
+
+script: py.test --nomigrations tests
+
+notifications:
+  email: false
+
