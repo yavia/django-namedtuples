@@ -1,7 +1,5 @@
 Django Namedtuples
 - 
-[![Requirements Status](https://requires.io/github/gukoff/django-namedtuples/requirements.svg?branch=master)](https://requires.io/github/gukoff/django-namedtuples/requirements/?branch=master)
-
 
 This library allows to select django models in form of [namedtuples](https://docs.python.org/2/library/collections.html#collections.namedtuple).
 
