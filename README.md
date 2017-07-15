@@ -42,5 +42,11 @@ second_car = Car.objects.all().namedtuples(
 
 print second_car
 # CarTuple(id=100, make='BMW', model='X6', color='white', country='Germany', constant_attr=100)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fyavia%2Fdjango-namedtuples.svg?type=shield)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fyavia%2Fdjango-namedtuples?ref=badge_shield)
+
 
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fyavia%2Fdjango-namedtuples.svg?type=large)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fyavia%2Fdjango-namedtuples?ref=badge_large)
