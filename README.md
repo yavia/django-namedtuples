@@ -19,18 +19,18 @@ patch_django_queryset()
 
 
 
-car_tuple = Car.objects.all().namedtuples(
+car = Car.objects.all().namedtuples(
     'id', 'make', 'model', 'color'
 )[0]
 
-print car_tuple  # CarTuple(id=100, make='BMW', model='X6', color='black')
-print car_tuple.id  # 100
-print car_tuple[1]  # BMW
-car_tuple.color = 'white'  # AttributeError: can't set attribute
+print car  # CarTuple(id=100, make='BMW', model='X6', color='black')
+print car.id  # 100
+print car[1]  # BMW
+car.color = 'white'  # AttributeError: can't set attribute
 
 
 
-second_car_tuple = Car.objects.all().namedtuples(
+second_car = Car.objects.all().namedtuples(
     'id', 'make', 'model', 'color',
     computational={
         'country': lambda row: 'Germany' if row[1] == 'BMW' else 'Unknown',
@@ -38,7 +38,7 @@ second_car_tuple = Car.objects.all().namedtuples(
     }
 ).get(id=200)
 
-print second_car_tuple
+print second_car
 # CarTuple(id=100, make='BMW', model='X6', color='white', country='Germany', constant_attr=100)
 
 ```
