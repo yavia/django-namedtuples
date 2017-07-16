@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
 
-from itertools import imap
 from collections import namedtuple, OrderedDict
+from itertools import chain
 
 from django.db.models.query import ValuesQuerySet
-
 
 class ModelInterface(object):
     _fields = ()
@@ -18,11 +17,13 @@ class NamedTuplesQuerySet(ValuesQuerySet):
 
     def iterator(self):
         # Purge any extra columns that haven't been explicitly asked for
-        extra_names = self.query.extra_select.keys()
-        field_names = self.field_names
-        aggregate_names = self.query.aggregate_select.keys()
         computational = self._computational_namedtuple_fields
-        names = extra_names + field_names + aggregate_names + computational.keys()
+        names = tuple(chain(
+            self.query.extra_select.keys(),
+            self.field_names,
+            self.query.aggregate_select.keys(),
+            computational.keys(),
+        ))
 
         tuple_name = '%sTuple' % self.model.__name__
         tuple_cls = namedtuple(tuple_name, names)
@@ -45,7 +46,7 @@ class NamedTuplesQuerySet(ValuesQuerySet):
         #       so they can go not in that order as in .namedtuples args
         #       if extra or aggregates are used.
         results_iter = self.query.get_compiler(self.db).results_iter()
-        return imap(make_tuple_instance, results_iter)
+        return (make_tuple_instance(x) for x in results_iter)
 
 
 def namedtuples(self, *fields, **kwargs):
@@ -57,7 +58,7 @@ def namedtuples(self, *fields, **kwargs):
     conflict_fields = set(computational) & set(fields)
     if conflict_fields:
         raise ValueError(
-            'Computational fields conflicts: {}'.format(conflict_fields)
+            'Computational fields conflict: {}'.format(conflict_fields)
         )
 
     interface = kwargs.pop('interface', None)
