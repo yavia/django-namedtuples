@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
 
+from enum import Enum
 from collections import namedtuple, OrderedDict
 from itertools import chain
 
@@ -11,8 +12,18 @@ class ModelInterface(object):
     _fields = ()
 
 
+class UnderscoreStrategy(Enum):
+    # NATIVE strategy forbids fields starting with an underscore, just like the namedtuple constructor
+    # https://docs.python.org/2/library/collections.html#collections.namedtuple
+    NATIVE = 0
+    # LSTRIP strategy strips leading underscores from field names
+    LSTRIP = 1
+
+
 def namedtuples(self, *fields, **kwargs):
     computational = OrderedDict(kwargs.pop('computational', {}))
+
+    underscore_strategy = kwargs.pop('underscore_strategy', UnderscoreStrategy.LSTRIP)
 
     conflict_fields = set(computational) & set(fields)
     if conflict_fields:
@@ -46,6 +57,8 @@ def namedtuples(self, *fields, **kwargs):
                 self.query.aggregate_select.keys(),
                 computational.keys(),
             ))
+            if underscore_strategy is UnderscoreStrategy.LSTRIP:
+                names = [n.lstrip('_') for n in names]
 
             tuple_name = '{}Tuple'.format(self.model.__name__)
             tuple_cls = namedtuple(tuple_name, names)
