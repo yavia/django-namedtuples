@@ -14,8 +14,8 @@ setup(
     name='django_namedtuples',
     description='Django namedtuples queryset',
 
-    author='Sergey Ivanov',
-    author_email='seiv@yandex-team.ru',
+    author='Konstantin Gukov',
+    author_email='gukkos@gmail.com',
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
