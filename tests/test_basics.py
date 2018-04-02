@@ -2,8 +2,8 @@ import uuid
 
 import pytest
 
-from django_namedtuples.queryset import namedtuples, ModelInterface
-from test_models.models import Point, Car
+from django_namedtuples.queryset import namedtuples, ModelInterface, UnderscoreStrategy
+from test_models.models import Point, Car, City
 
 
 @pytest.mark.django_db
@@ -105,3 +105,24 @@ def test_modelinterface_uses_computational_fields():
     assert car.wheel_count == 4
     assert car.has_four_wheels()
 
+
+@pytest.mark.django_db
+def test_underscore_strategies():
+    City(_geo_id=1, title='London').save()
+    City(_geo_id=2, title='Berlin').save()
+
+    cities = list(namedtuples(
+        City.objects.all(),
+        underscore_strategy=UnderscoreStrategy.LSTRIP
+    ))
+
+    assert len(cities) == 2
+    for city in cities:
+        assert set(city._asdict()) == {'id', 'geo_id', 'title'}
+
+    with pytest.raises(ValueError) as e_info:
+        list(namedtuples(
+            City.objects.all(),
+            underscore_strategy=UnderscoreStrategy.NATIVE
+        ))
+    assert str(e_info.value).startswith('Field names cannot start with an underscore')
