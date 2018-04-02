@@ -20,9 +20,9 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.0.2',
-    url='https://github.com/gukoff/django-namedtuples',
-    download_url='https://github.com/gukoff/django-namedtuples/archive/0.0.2.tar.gz',
+    version='1.0.0',
+    url='https://github.com/yavia/django-namedtuples',
+    download_url='https://github.com/yavia/django-namedtuples/archive/1.0.0.tar.gz',
 
     license='GPLv3',
 
