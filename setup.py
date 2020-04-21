@@ -20,18 +20,21 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='1.0.0',
+    version='2.0.0',
     url='https://github.com/yavia/django-namedtuples',
-    download_url='https://github.com/yavia/django-namedtuples/archive/1.0.0.tar.gz',
+    download_url='https://github.com/yavia/django-namedtuples/archive/2.0.0.tar.gz',
 
-    license='GPLv3',
+    license='MIT',
 
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'Framework :: Django :: 1.8',
-        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+        'Framework :: Django :: 1.9',
+        'Framework :: Django :: 1.10',
+        'Framework :: Django :: 1.11',
+        'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 2.7',
     ],
 
@@ -45,5 +48,5 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['enum34', 'Django>=1.7.0', 'Django<1.9'],
+    install_requires=['enum34', 'Django>=1.7.0', 'Django<1.12'],
 )
